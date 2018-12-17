@@ -15,11 +15,11 @@ public class Server {
         KraftwerkImpl ki1 = new KraftwerkImpl("Etzelwerk", "Sihlsee", "WK", 120);
         KraftwerkImpl ki2 = new KraftwerkImpl("Le Havre", "Le Havre", "FK", 1450);
 
-        //????
-        ki1.addKraftwerke(ki1);
 
         timer.schedule(ki1,0,5000);
         timer.schedule(ki2,0,5000);
+
+
 
         Kraftwerk k1 = (Kraftwerk) UnicastRemoteObject.exportObject(ki1,0);
         Kraftwerk k2 = (Kraftwerk) UnicastRemoteObject.exportObject(ki2,0);

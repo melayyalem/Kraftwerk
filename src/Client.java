@@ -4,22 +4,28 @@ import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
-        Kraftwerk k = null;
+        List<Kraftwerk> Kraftwerke = new ArrayList<>();
         try {
             Registry registry = LocateRegistry.getRegistry();
-            k = (Kraftwerk) registry.lookup("Kraftwerk1");
+            String[] KraftwerkeNamen = registry.list();
+            for (String name : KraftwerkeNamen){
+                System.out.println(name);
+                Kraftwerke.add((Kraftwerk) registry.lookup(name));
+            }
         }catch (Exception e1){
             System.out.println("Error connecting");
         }
 
         while(true) {
             try {
-                //???
-                //System.out.println(k.getKraftwerke().get(0));
-                System.out.println("Name: "+k.getName()+" Leistung: "+k.getLeistung()+"/"+k.getNennleistung()+" Standort: "+k.getStandort());
+                for(Kraftwerk kf: Kraftwerke){
+                    System.out.println("Name: "+kf.getName()+" Leistung: "+kf.getLeistung()+"/"+kf.getNennleistung()+" Standort: "+kf.getStandort());
+                }
                 Thread.sleep(1000);
             } catch (Exception e1) {
                 System.out.println("Error");

@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.TimerTask;
 
 public class KraftwerkImpl extends TimerTask implements Kraftwerk {
-    public static List Kraftwerke  = new ArrayList<>();
+
 
     private String Name;
     private String Standort;
@@ -25,17 +25,12 @@ public class KraftwerkImpl extends TimerTask implements Kraftwerk {
         return Name;
     }
 
-    public void addKraftwerke(Kraftwerk neu) {
-        Kraftwerke.add(neu);
-    }
 
     public Integer getNennleistung() {
         return Nennleistung;
     }
 
-    public List getKraftwerke() {
-        return Kraftwerke;
-    }
+
 
     public String getStandort() {
         return Standort;
