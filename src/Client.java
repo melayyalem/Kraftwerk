@@ -15,10 +15,16 @@ public class Client {
             System.out.println("Error connecting");
         }
 
-        try{
-            System.out.println(k.getLeistung());
-        }catch (Exception e1){
-            System.out.println("Error");
+        while(true) {
+            try {
+                //???
+                //System.out.println(k.getKraftwerke().get(0));
+                System.out.println("Name: "+k.getName()+" Leistung: "+k.getLeistung()+"/"+k.getNennleistung()+" Standort: "+k.getStandort());
+                Thread.sleep(1000);
+            } catch (Exception e1) {
+                System.out.println("Error");
+            }
         }
     }
 }
+

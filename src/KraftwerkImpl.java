@@ -1,28 +1,63 @@
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.TimerTask;
 
-public class KraftwerkImpl implements Kraftwerk {
-private String Name;
-private String Standort;
-private String Kraftwerktyp;
-private Integer Nennleistung;
-private Integer Momentanleistung;
+public class KraftwerkImpl extends TimerTask implements Kraftwerk {
+    public static List Kraftwerke  = new ArrayList<>();
 
-public KraftwerkImpl(String Name, String Standort, String Kraftwerktyp, Integer Nennleistung){
-    this.Name = Name;
-    this.Standort = Standort;
-    this. Kraftwerktyp = Kraftwerktyp;
-    this.Nennleistung = Nennleistung;
-    setLeistung();
-}
+    private String Name;
+    private String Standort;
+    private String Kraftwerktyp;
+    private Integer Nennleistung;
+    private Integer Momentanleistung;
 
-private void setLeistung(){
-     Random r = new Random();
-     Momentanleistung = (int) Math.round(r.nextGaussian() * Nennleistung);
-}
+    public KraftwerkImpl(String Name, String Standort, String Kraftwerktyp, Integer Nennleistung) {
+        this.Name = Name;
+        this.Standort = Standort;
+        this.Kraftwerktyp = Kraftwerktyp;
+        this.Nennleistung = Nennleistung;
+        setLeistung();
+    }
 
-    @Override
-    public String getLeistung() {
+    public String getName() {
         return Name;
     }
+
+    public void addKraftwerke(Kraftwerk neu) {
+        Kraftwerke.add(neu);
+    }
+
+    public Integer getNennleistung() {
+        return Nennleistung;
+    }
+
+    public List getKraftwerke() {
+        return Kraftwerke;
+    }
+
+    public String getStandort() {
+        return Standort;
+    }
+
+    private void setLeistung() {
+        Random r = new Random();
+        Momentanleistung = (int) Math.abs(Math.round(r.nextGaussian() * Nennleistung));
+    }
+
+
+    public String getKraftwerktyp() {
+        return Kraftwerktyp;
+    }
+
+    @Override
+    public int getLeistung() {
+        return Momentanleistung;
+    }
+
+    public void run() {
+        this.setLeistung();
+    }
 }
+
